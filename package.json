@@ -1,6 +1,11 @@
 {
-	"author" :"sonu k. meena",
-	"dependencies" : {
-		
-	}
+  "author": "sonu k. meena",
+  "dependencies": {
+    "shoe": "0.0.15",
+    "reconnect": "~1.5.2",
+    "event-stream": "~3.0.20",
+    "dnode": "~1.2.0",
+    "ecstatic": "~0.4.13"
+
+  }
 }
