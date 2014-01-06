@@ -18,10 +18,11 @@ setInterval(function(){
 
 }, 3000);
     */
-var d = dnode();
 reconnect(function(stream){
 
     console.log("trying connecting to dnode...");
+    var d = dnode();
+
  //   setInterval(function(){
         d.on('remote', function(remote){
             console.log("calling remote methods..");
@@ -34,4 +35,4 @@ reconnect(function(stream){
 
     d.pipe(stream).pipe(d);
 
-}).connect('/dnode');
+}).connect('/stream');

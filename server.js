@@ -22,4 +22,4 @@ var sock = shoe( function(stream){
     
 });
 
-sock.install(server, "/dnode");
+sock.install(server, "/stream");
