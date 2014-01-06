@@ -8,7 +8,8 @@
     "reconnect": "~1.5.2",
     "event-stream": "~3.0.20",
     "dnode": "~1.2.0",
-    "ecstatic": "~0.4.13"
+    "ecstatic": "~0.4.13",
+    "random-color": "~0.0.0"
 
   }
 }
