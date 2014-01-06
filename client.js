@@ -1,6 +1,8 @@
 var shoe = require("shoe");
 var dnode = require("dnode");
 var reconnect = require("reconnect/shoe");
+var randomColor = require('random-color')
+
 
 var resultDiv = document.getElementById('result');
 
@@ -15,6 +17,7 @@ d.on('remote', function(remote){
             console.log( "new date: " , newDate);
             var resultDiv = document.getElementById('result');
             resultDiv.textContent = newDate;
+            resultDiv.style.color = randomColor();
         });    
     }, 3000);    
 });

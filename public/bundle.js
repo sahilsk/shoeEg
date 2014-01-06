@@ -6839,31 +6839,37 @@ function hasOwnProperty(obj, prop) {
 var shoe = require("shoe");
 var dnode = require("dnode");
 var reconnect = require("reconnect/shoe");
+var randomColor = require('random-color')
+
 
 var resultDiv = document.getElementById('result');
 
-//var stream  = shoe("/stream");
+var stream  = shoe("/stream");
+var d = dnode();
+d.pipe(stream).pipe(d);
+
+d.on('remote', function(remote){
+    setInterval(function(){    
+        console.log("calling remote methods..");
+        remote.currentTime( (new Date()).toString(), function(newDate){
+            console.log( "new date: " , newDate);
+            var resultDiv = document.getElementById('result');
+            resultDiv.textContent = newDate;
+            resultDiv.style.color = randomColor();
+        });    
+    }, 3000);    
+});
 
 
 /*
-setInterval(function(){
-    d.on('remote', function(remote){
-        console.log("calling remote methods..");
-        remote.currentTime( (new Date()).toDateString(), function(newDate){
-            resultDiv.textContent += "<br/>" + newDate;
-        });
-    });
-
-}, 3000);
-    */
-var d = dnode();
 reconnect(function(stream){
-
+    console.log("trying connecting to dnode...");
+    var d = dnode();
  //   setInterval(function(){
         d.on('remote', function(remote){
             console.log("calling remote methods..");
             remote.currentTime( (new Date()).toDateString(), function(newDate){
-                resultDiv.textContent += "<br/>" + newDate;
+                resultDiv.textContent = newDate;
             });
         });
     
@@ -6872,7 +6878,8 @@ reconnect(function(stream){
     d.pipe(stream).pipe(d);
 
 }).connect('/stream');
-},{"dnode":25,"reconnect/shoe":66,"shoe":69}],25:[function(require,module,exports){
+*/
+},{"dnode":25,"random-color":36,"reconnect/shoe":67,"shoe":70}],25:[function(require,module,exports){
 var dnode = require('./lib/dnode');
 
 module.exports = function (cons, opts) {
@@ -8016,6 +8023,18 @@ module.exports = function (value, replacer, space) {
 };
 
 },{}],36:[function(require,module,exports){
+module.exports = color;
+
+function num(cap){
+  return Math.floor( Math.random() * cap );
+}
+
+function color(cap){
+  cap || ( cap = 255 );
+  return 'rgb(' + num(cap) + ', ' + num(cap) + ', ' + num(cap) + ')';
+}
+
+},{}],37:[function(require,module,exports){
 var EventEmitter = require('events').EventEmitter
 var backoff = require('backoff')
 
@@ -8129,7 +8148,7 @@ function (createConnection) {
 
 }
 
-},{"./widget":68,"backoff":37,"events":2}],37:[function(require,module,exports){
+},{"./widget":69,"backoff":38,"events":2}],38:[function(require,module,exports){
 /*
  * Copyright (c) 2012 Mathieu Turcotte
  * Licensed under the MIT license.
@@ -8162,7 +8181,7 @@ module.exports.exponential = function(options) {
 };
 
 
-},{"./lib/backoff":38,"./lib/strategy/exponential":39,"./lib/strategy/fibonacci":40}],38:[function(require,module,exports){
+},{"./lib/backoff":39,"./lib/strategy/exponential":40,"./lib/strategy/fibonacci":41}],39:[function(require,module,exports){
 /*
  * Copyright (c) 2012 Mathieu Turcotte
  * Licensed under the MIT license.
@@ -8226,7 +8245,7 @@ Backoff.prototype.reset = function() {
 module.exports = Backoff;
 
 
-},{"events":2,"util":23}],39:[function(require,module,exports){
+},{"events":2,"util":23}],40:[function(require,module,exports){
 /*
  * Copyright (c) 2012 Mathieu Turcotte
  * Licensed under the MIT license.
@@ -8263,7 +8282,7 @@ ExponentialBackoffStrategy.prototype.reset_ = function() {
 module.exports = ExponentialBackoffStrategy;
 
 
-},{"./strategy":41,"util":23}],40:[function(require,module,exports){
+},{"./strategy":42,"util":23}],41:[function(require,module,exports){
 /*
  * Copyright (c) 2012 Mathieu Turcotte
  * Licensed under the MIT license.
@@ -8301,7 +8320,7 @@ FibonacciBackoffStrategy.prototype.reset_ = function() {
 module.exports = FibonacciBackoffStrategy;
 
 
-},{"./strategy":41,"util":23}],41:[function(require,module,exports){
+},{"./strategy":42,"util":23}],42:[function(require,module,exports){
 /*
  * Copyright (c) 2012 Mathieu Turcotte
  * Licensed under the MIT license.
@@ -8400,7 +8419,7 @@ BackoffStrategy.prototype.reset_ = function() {
 module.exports = BackoffStrategy;
 
 
-},{"events":2,"util":23}],42:[function(require,module,exports){
+},{"events":2,"util":23}],43:[function(require,module,exports){
 var split = require('browser-split')
 var ClassList = require('class-list')
 var DataSet = require('data-set')
@@ -8545,7 +8564,7 @@ function isArray (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]'
 }
 
-},{"browser-split":43,"class-list":44,"data-set":46,"html-element":1}],43:[function(require,module,exports){
+},{"browser-split":44,"class-list":45,"data-set":47,"html-element":1}],44:[function(require,module,exports){
 /*!
  * Cross-Browser Split 1.1.1
  * Copyright 2007-2012 Steven Levithan <stevenlevithan.com>
@@ -8653,7 +8672,7 @@ module.exports = (function split(undef) {
   return self;
 })();
 
-},{}],44:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 // contains, add, remove, toggle
 var indexof = require('indexof')
 
@@ -8754,7 +8773,7 @@ function isTruthy(value) {
     return !!value
 }
 
-},{"indexof":45}],45:[function(require,module,exports){
+},{"indexof":46}],46:[function(require,module,exports){
 
 var indexOf = [].indexOf;
 
@@ -8765,7 +8784,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],46:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var Weakmap = require("weakmap")
 var Individual = require("individual")
 
@@ -8809,7 +8828,7 @@ function createHash(elem) {
     return hash
 }
 
-},{"individual":47,"weakmap":49}],47:[function(require,module,exports){
+},{"individual":48,"weakmap":50}],48:[function(require,module,exports){
 var root = require("global")
 
 module.exports = Individual
@@ -8827,7 +8846,7 @@ function Individual(key, value) {
     return value
 }
 
-},{"global":48}],48:[function(require,module,exports){
+},{"global":49}],49:[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};/*global window, global*/
 if (typeof global !== "undefined") {
     module.exports = global
@@ -8835,7 +8854,7 @@ if (typeof global !== "undefined") {
     module.exports = window
 }
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 /* (The MIT License)
  *
  * Copyright (c) 2012 Brandon Benvie <http://bbenvie.com>
@@ -9077,7 +9096,7 @@ void function(global, undefined_, undefined){
     global.WeakMap.createStorage = createStorage;
 }((0, eval)('this'));
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 ;(function () {
 
 // bind a to b -- One Way Binding
@@ -9277,7 +9296,7 @@ if('object' === typeof module) module.exports = exports
 else                           this.observable = exports
 })()
 
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 var DataChannel = require('data-channel')
     , sockjs = require('sockjs-client')
 
@@ -9292,7 +9311,7 @@ function Stream(uri, options) {
     return DataChannel(sock)
 }
 
-},{"./uri":65,"data-channel":52,"sockjs-client":64}],52:[function(require,module,exports){
+},{"./uri":66,"data-channel":53,"sockjs-client":65}],53:[function(require,module,exports){
 var ReadWriteStream = require("read-write-stream")
 
 module.exports = DataChannel
@@ -9355,7 +9374,7 @@ function DataChannel(channel) {
     }
 }
 
-},{"read-write-stream":53}],53:[function(require,module,exports){
+},{"read-write-stream":54}],54:[function(require,module,exports){
 var Stream = require("readable-stream")
     , Queue = require("read-stream/lib/queue")
     , extend = require("xtend")
@@ -9436,7 +9455,7 @@ function defaultRead(bytes, queue) {
     return queue.shift()
 }
 
-},{"read-stream/lib/queue":54,"readable-stream":62,"xtend":63}],54:[function(require,module,exports){
+},{"read-stream/lib/queue":55,"readable-stream":63,"xtend":64}],55:[function(require,module,exports){
 var process=require("__browserify_process");module.exports = Queue
 
 function Queue(stream) {
@@ -9499,7 +9518,7 @@ function Queue(stream) {
     }
 }
 
-},{"__browserify_process":5}],55:[function(require,module,exports){
+},{"__browserify_process":5}],56:[function(require,module,exports){
 var process=require("__browserify_process");// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -9570,7 +9589,7 @@ function onend() {
   process.nextTick(this.end.bind(this));
 }
 
-},{"./_stream_readable":57,"./_stream_writable":59,"__browserify_process":5,"util":23}],56:[function(require,module,exports){
+},{"./_stream_readable":58,"./_stream_writable":60,"__browserify_process":5,"util":23}],57:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -9613,7 +9632,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./_stream_transform":58,"util":23}],57:[function(require,module,exports){
+},{"./_stream_transform":59,"util":23}],58:[function(require,module,exports){
 var process=require("__browserify_process"),global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},Buffer=require("__browserify_Buffer");// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -10535,7 +10554,7 @@ function endReadable(stream) {
   }
 }
 
-},{"__browserify_Buffer":4,"__browserify_process":5,"core-util-is":60,"debuglog":61,"events":2,"stream":14,"string_decoder":20,"util":23}],58:[function(require,module,exports){
+},{"__browserify_Buffer":4,"__browserify_process":5,"core-util-is":61,"debuglog":62,"events":2,"stream":14,"string_decoder":20,"util":23}],59:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -10747,7 +10766,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./_stream_duplex":55,"core-util-is":60,"util":23}],59:[function(require,module,exports){
+},{"./_stream_duplex":56,"core-util-is":61,"util":23}],60:[function(require,module,exports){
 var process=require("__browserify_process"),Buffer=require("__browserify_Buffer");// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -11208,7 +11227,7 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
-},{"./_stream_duplex":55,"__browserify_Buffer":4,"__browserify_process":5,"core-util-is":60,"stream":14,"util":23}],60:[function(require,module,exports){
+},{"./_stream_duplex":56,"__browserify_Buffer":4,"__browserify_process":5,"core-util-is":61,"stream":14,"util":23}],61:[function(require,module,exports){
 var Buffer=require("__browserify_Buffer");// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -11316,7 +11335,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-},{"__browserify_Buffer":4}],61:[function(require,module,exports){
+},{"__browserify_Buffer":4}],62:[function(require,module,exports){
 var process=require("__browserify_process");var util = require('util');
 
 module.exports = util.debuglog || debuglog;
@@ -11340,7 +11359,7 @@ function debuglog(set) {
   return debugs[set];
 };
 
-},{"__browserify_process":5,"util":23}],62:[function(require,module,exports){
+},{"__browserify_process":5,"util":23}],63:[function(require,module,exports){
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = require('stream');
 exports.Readable = exports;
@@ -11349,7 +11368,7 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":55,"./lib/_stream_passthrough.js":56,"./lib/_stream_readable.js":57,"./lib/_stream_transform.js":58,"./lib/_stream_writable.js":59,"stream":14}],63:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":56,"./lib/_stream_passthrough.js":57,"./lib/_stream_readable.js":58,"./lib/_stream_transform.js":59,"./lib/_stream_writable.js":60,"stream":14}],64:[function(require,module,exports){
 module.exports = extend
 
 function extend(target) {
@@ -11365,7 +11384,7 @@ function extend(target) {
 
     return target
 }
-},{}],64:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 /* SockJS client, version 0.3.1.7.ga67f.dirty, http://sockjs.org, MIT License
 
 Copyright (c) 2011-2012 VMware, Inc.
@@ -13690,7 +13709,7 @@ if (typeof module === 'object' && module && module.exports) {
 // [*] End of lib/all.js
 
 
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 var protocolLess = /^\/\/[^\/]+\//
     , hasProtocol = /^https?:\/\//
     , hasSlash = /^\//
@@ -13710,11 +13729,11 @@ function normalizeUri(uri) {
     return uri
 }
 
-},{}],66:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 
 module.exports = require('./sock')
 
-},{"./sock":67}],67:[function(require,module,exports){
+},{"./sock":68}],68:[function(require,module,exports){
 
 var sock = require('sockjs-stream')
 
@@ -13728,7 +13747,7 @@ module.exports = require('./inject')(function (){
   return sock.apply(null, args)
 })
 
-},{"./inject":36,"sockjs-stream":51}],68:[function(require,module,exports){
+},{"./inject":37,"sockjs-stream":52}],69:[function(require,module,exports){
 
 var h = require('hyperscript')
 var o = require('observable')
@@ -13777,7 +13796,7 @@ module.exports = function (emitter) {
   return el
 }
 
-},{"hyperscript":42,"observable":50}],69:[function(require,module,exports){
+},{"hyperscript":43,"observable":51}],70:[function(require,module,exports){
 var Stream = require('stream');
 var sockjs = require('sockjs-client');
 var resolve = require('url').resolve;
@@ -13842,7 +13861,7 @@ module.exports = function (u, cb) {
     return stream;
 };
 
-},{"sockjs-client":70,"stream":14,"url":21}],70:[function(require,module,exports){
+},{"sockjs-client":71,"stream":14,"url":21}],71:[function(require,module,exports){
 /* SockJS client, version 0.3.1.7.ga67f.dirty, http://sockjs.org, MIT License
 
 Copyright (c) 2011-2012 VMware, Inc.
