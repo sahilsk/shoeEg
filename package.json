@@ -2,7 +2,7 @@
   
     "author": "sonu k. meena",
     "scripts":{
-        "start": "node server.js"  ,
+        "start": "node ticker.js"  ,
         "preinstall" : "npm i -g browserify",
         "postinstall": "browserify client.js -o ./public/bundle.js"
     },
