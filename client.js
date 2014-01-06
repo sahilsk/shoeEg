@@ -4,8 +4,6 @@ var reconnect = require("reconnect/shoe");
 var randomColor = require('random-color')
 
 
-var resultDiv = document.getElementById('result');
-
 var stream  = shoe("/stream");
 var d = dnode();
 d.pipe(stream).pipe(d);
@@ -13,11 +11,19 @@ d.pipe(stream).pipe(d);
 d.on('remote', function(remote){
     setInterval(function(){    
         console.log("calling remote methods..");
-        remote.currentTime( (new Date()).toString(), function(newDate){
-            console.log( "new date: " , newDate);
-            var resultDiv = document.getElementById('result');
-            resultDiv.textContent = newDate;
-            resultDiv.style.color = randomColor();
+        
+        var dateDiv = document.getElementById('date');
+        var timeDiv = document.getElementById('time');
+        
+        var oldDateTime ={ 'date': dateDiv.textContent, 'time': timeDiv.textContent };
+                          
+        remote.currentTime( JSON.stringify(oldDateTime), function(newDateTime){
+            var newDateTimeObj = JSON.parse( newDateTime);
+            console.log( "new time: " , newDateTimeObj.time);
+            dateDiv.textContent = newDateTimeObj.date;
+            
+            timeDiv.textContent = newDateTimeObj.time;
+            timeDiv.style.color = randomColor();
         });    
     }, 1000);    
 });

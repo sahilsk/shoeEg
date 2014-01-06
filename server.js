@@ -13,9 +13,11 @@ server.listen( port, function(){
 var sock = shoe( function(stream){
     var d = dnode({
         currentTime: function(oldTime, cb){
+            var newDateObj = (new Date());
+            var newDateTime = { date: newDateObj.toLocaleDateString(), time: newDateObj.toLocaleTimeString() };
             console.log("Changing time from ", oldTime);
-            console.log("new time: " , (new Date()).toString() );
-            cb( (new Date()).toString());
+            console.log("new time: " , newDate );
+            cb( JSON.stringify(newDateTime) );
         }
     });
     
