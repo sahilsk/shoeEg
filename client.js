@@ -21,6 +21,7 @@ setInterval(function(){
 var d = dnode();
 reconnect(function(stream){
 
+    console.log("trying connecting to dnode...");
  //   setInterval(function(){
         d.on('remote', function(remote){
             console.log("calling remote methods..");
