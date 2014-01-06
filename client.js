@@ -4,7 +4,7 @@ var reconnect = require("reconnect/shoe");
 
 var resultDiv = document.getElementById('result');
 
-var sock  = shoe("/stream");
+var stream  = shoe("/stream");
 
 var d = dnode();
 d.on('remote', function(remote){
