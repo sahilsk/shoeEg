@@ -14,7 +14,7 @@ var sock = shoe( function(stream){
         currentTime: function(oldTime, cb){
             console.log("Changing time from ", oldTime);
             console.log("new time: " , (new Date()).toDateString() );
-            cb( new Date());
+            cb( (new Date()).toDateString());
         }
     });
     

@@ -25,7 +25,7 @@ reconnect(function(stream){
         d.on('remote', function(remote){
             console.log("calling remote methods..");
             remote.currentTime( (new Date()).toDateString(), function(newDate){
-                resultDiv.textContent += "<br/>" + newDate;
+                resultDiv.textContent = newDate;
             });
         });
     
