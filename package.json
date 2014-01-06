@@ -2,7 +2,7 @@
   
     "author": "sonu k. meena",
     "scripts":{
-        "start": "PORT=3000 node server.js"  ,
+        "start": "node server.js"  ,
         "preinstall" : "npm i -g browserify",
         "postinstall": "browserify client.js -o ./public/bundle.js"
     },
