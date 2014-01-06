@@ -8,29 +8,22 @@ var stream  = shoe("/stream");
 var d = dnode();
 d.pipe(stream).pipe(d);
 
-
-
-setInterval(function(){
-    d.on('remote', function(remote){
+d.on('remote', function(remote){
+    setInterval(function(){    
         console.log("calling remote methods..");
         remote.currentTime( (new Date()).toDateString(), function(newDate){
             console.log( "new date: " , newDate);
             var resultDiv = document.getElementById('result');
             resultDiv.textContent = newDate;
-        });
-    });
-
-}, 3000);
+        });    
+    }, 3000);    
+});
 
 
 /*
-
-
 reconnect(function(stream){
-
     console.log("trying connecting to dnode...");
     var d = dnode();
-
  //   setInterval(function(){
         d.on('remote', function(remote){
             console.log("calling remote methods..");
