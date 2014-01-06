@@ -34,4 +34,4 @@ reconnect(function(stream){
 
     d.pipe(stream).pipe(d);
 
-}).connect('/stream');
+}).connect('http://http://54.241.199.165:3000/dnode');

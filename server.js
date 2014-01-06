@@ -5,7 +5,7 @@ var http = require("http");
 var ecstatic  = require("ecstatic")(__dirname + '/public');
 
 var server = http.createServer(ecstatic);
-server.listen( process.env.PORT ||3000, function(port){
+server.listen( process.env.PORT ||3000, function(){
     console.log("Server listening at port: ", (process.env.PORT ||3000) );
 });
     
@@ -22,4 +22,4 @@ var sock = shoe( function(stream){
     
 });
 
-sock.install(server, "/stream");
+sock.install(server, "/dnode");
