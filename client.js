@@ -9,7 +9,7 @@ var d = dnode();
 d.pipe(stream).pipe(d);
 
 d.on('remote', function(remote){
-    setInterval(function(){    
+    setInterval(function(){  
         console.log("calling remote methods..");
         
         var dateDiv = document.getElementById('date');
