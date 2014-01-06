@@ -13,7 +13,7 @@ var r = reconnect( function(stream){
 }).connect("/stream");
 
 
-var handleLink = functioin(remote){
+var handleLink = function(remote){
     
     setInterval(function(){  
         console.log("calling remote methods..");
