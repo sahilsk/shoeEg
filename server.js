@@ -16,7 +16,7 @@ var sock = shoe( function(stream){
             var newDateObj = (new Date());
             var newDateTime = { date: newDateObj.toLocaleDateString(), time: newDateObj.toLocaleTimeString() };
             console.log("Changing time from ", oldTime);
-            console.log("new time: " , newDate );
+            console.log("new time: " , JSON.stringify(newDateTime) );
             cb( JSON.stringify(newDateTime) );
         }
     });
