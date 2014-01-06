@@ -4,7 +4,19 @@ var reconnect = require("reconnect/shoe");
 
 var resultDiv = document.getElementById('result');
 
-//var stream  = shoe("/stream");
+var sock  = shoe("/stream");
+
+var d = dnode();
+d.on('remote', function(remote){
+    console.log("calling remote methods..");
+    remote.currentTime( (new Date()).toDateString(), function(newDate){
+        console.log( "new date: " , newDate);
+        resultDiv.textContent = newDate;
+    });
+});
+
+d.pipe(stream).pipe(d);
+
 
 
 /*
@@ -17,7 +29,9 @@ setInterval(function(){
     });
 
 }, 3000);
-    */
+
+
+
 reconnect(function(stream){
 
     console.log("trying connecting to dnode...");
@@ -36,3 +50,4 @@ reconnect(function(stream){
     d.pipe(stream).pipe(d);
 
 }).connect('/stream');
+*/
