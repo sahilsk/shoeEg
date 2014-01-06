@@ -11,6 +11,8 @@ d.on('remote', function(remote){
     console.log("calling remote methods..");
     remote.currentTime( (new Date()).toDateString(), function(newDate){
         console.log( "new date: " , newDate);
+        var resultDiv = document.getElementById('result');
+
         resultDiv.textContent = newDate;
     });
 });
