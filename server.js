@@ -5,8 +5,9 @@ var http = require("http");
 var ecstatic  = require("ecstatic")(__dirname + '/public');
 
 var server = http.createServer(ecstatic);
-server.listen( process.env.PORT ||3000, function(){
-    console.log("Server listening at port: ", (process.env.PORT ||3000) );
+var port = process.env.PORT || 3000;
+server.listen( port, function(){
+    console.log("Server listening at port: ", port );
 });
     
 var sock = shoe( function(stream){
