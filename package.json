@@ -1,5 +1,8 @@
 {
   "author": "sonu k. meena",
+"scripts":{
+    "start": "PORT=3000 node server.js"  
+},
   "dependencies": {
     "shoe": "0.0.15",
     "reconnect": "~1.5.2",

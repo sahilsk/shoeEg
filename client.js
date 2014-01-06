@@ -1,25 +1,36 @@
 var shoe = require("shoe");
-var reconnect = require("reconnect");
-var dnode =  require("dnode");
-var es  = require("event-stream");
+var dnode = require("dnode");
+var reconnect = require("reconnect/shoe");
 
-var result = document.getElementById('result');
+var resultDiv = document.getElementById('result');
 
-var r = reconnect( function( stream){
+//var stream  = shoe("/stream");
+
+
 /*
-	var s = es.mapSync( function(msg){
-			result.appendChild(document.createTextNode(msg));
-			return String(msg);
-	});
-	*/
-	var d = dnode();
-	d.on('remote', function(remote){
-		remote.square(5, function(s){
-			console.log( s);
-		});
-	});
-	
-	d.pipe(stream).pipe(d);
-//	s.pipe(stream).pipe(s);
-	
-}).connect("/stream");
+setInterval(function(){
+    d.on('remote', function(remote){
+        console.log("calling remote methods..");
+        remote.currentTime( (new Date()).toDateString(), function(newDate){
+            resultDiv.textContent += "<br/>" + newDate;
+        });
+    });
+
+}, 3000);
+    */
+var d = dnode();
+reconnect(function(stream){
+
+ //   setInterval(function(){
+        d.on('remote', function(remote){
+            console.log("calling remote methods..");
+            remote.currentTime( (new Date()).toDateString(), function(newDate){
+                resultDiv.textContent += "<br/>" + newDate;
+            });
+        });
+    
+//    }, 3000);    
+
+    d.pipe(stream).pipe(d);
+
+}).connect('/stream');
