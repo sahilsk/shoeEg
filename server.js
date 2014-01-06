@@ -13,8 +13,8 @@ var sock = shoe( function(stream){
     var d = dnode({
         currentTime: function(oldTime, cb){
             console.log("Changing time from ", oldTime);
-            console.log("new time: " , (new Date()).toDateString() );
-            cb( (new Date()).toDateString());
+            console.log("new time: " , (new Date()).toString() );
+            cb( (new Date()).toString());
         }
     });
     

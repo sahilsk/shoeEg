@@ -11,7 +11,7 @@ d.pipe(stream).pipe(d);
 d.on('remote', function(remote){
     setInterval(function(){    
         console.log("calling remote methods..");
-        remote.currentTime( (new Date()).toDateString(), function(newDate){
+        remote.currentTime( (new Date()).toString(), function(newDate){
             console.log( "new date: " , newDate);
             var resultDiv = document.getElementById('result');
             resultDiv.textContent = newDate;
