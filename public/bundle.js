@@ -6857,7 +6857,7 @@ d.on('remote', function(remote){
             resultDiv.textContent = newDate;
             resultDiv.style.color = randomColor();
         });    
-    }, 3000);    
+    }, 1000);    
 });
 
 
