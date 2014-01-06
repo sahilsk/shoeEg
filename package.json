@@ -1,20 +1,21 @@
 {
-  "author": "sonu k. meena",
-"scripts":{
+  
+    "author": "sonu k. meena",
+    "scripts":{
         "start": "PORT=3000 node server.js"  ,
-    "preinstall" : "npm i -g browserify",
-    "postinstall": "browserify client.js -o ./public/bundle.js"
-        },
-"engines": {
-    "node": "0.10.x"
-  },
-  "dependencies": {
-    "shoe": "0.0.15",
-    "reconnect": "~1.5.2",
-    "event-stream": "~3.0.20",
-    "dnode": "~1.2.0",
-    "ecstatic": "~0.4.13",
-    "random-color": "~0.0.0"
-
-  }
+        "preinstall" : "npm i -g browserify",
+        "postinstall": "browserify client.js -o ./public/bundle.js"
+    },
+    "engines": {
+        "node": "0.10.x"
+    },
+    "dependencies": {
+        "shoe": "0.0.15",
+        "reconnect": "~1.5.2",
+        "event-stream": "~3.0.20",
+        "dnode": "~1.2.0",
+        "ecstatic": "~0.4.13",
+        "random-color": "~0.0.0",
+        "sockjs-client":"~0.1.3"
+    }
 }
