@@ -1,8 +1,13 @@
 {
   "author": "sonu k. meena",
 "scripts":{
-    "start": "PORT=3000 node server.js"  
-},
+        "start": "PORT=3000 node server.js"  ,
+    "preinstall" : "npm i -g browserify",
+    "postinstall": "browserify client.js -o ./public/bundle.js"
+        },
+"engines": {
+    "node": "0.10.x"
+  },
   "dependencies": {
     "shoe": "0.0.15",
     "reconnect": "~1.5.2",
