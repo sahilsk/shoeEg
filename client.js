@@ -1,6 +1,6 @@
 var shoe = require("shoe");
 var dnode = require("dnode");
-var reconnect = require("reconnect/shoe");
+var reconnect = require("reconnect");
 var randomColor = require('random-color')
 
 
